@@ -10,7 +10,7 @@ export default function App() {
   const moviesUrl = "https://api.themoviedb.org/3/discover/movie?api_key=d432b933ecc6d5642d8d2befbc40c7ac&language=en-US&page=1&include_adult=false"
 
   //image base url
-  const imgUrl = 'https://image.tmdb.org/t/p/w500/'
+  const imgUrl = 'https://image.tmdb.org/t/p/w500'
 
   //url for the genres
   const genresUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=d432b933ecc6d5642d8d2befbc40c7ac&language=en-US'
@@ -32,15 +32,13 @@ export default function App() {
   const Movies = () => movies.map(movie => {
     return (
       <View style={styles.results} key={movie.id}>
-        <Image
-          source={{
-            uri: `${imgUrl}${movie.poster_path}`
-          }}
-        />
 
         <Text style={styles.card}>{movie.title} </Text>
-        <Text style={styles.rating}>Rating:{movie.vote_average}</Text>
+        <Image source={{ uri: 'https://image.tmdb.org/t/p/w500' + movie.poster_path }}
+          style={{ width: 250, height: 400, borderRadius: 25 }}
+        />
 
+        <Text style={styles.rating}>Rating:{movie.vote_average}</Text>
 
       </View>
     )
@@ -68,7 +66,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#222',
+    backgroundColor: '#121212',
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingTop: 70,
@@ -91,7 +89,8 @@ const styles = StyleSheet.create({
   },
   rating: {
     fontSize: 12,
-    color: '#00845f',
+    color: '#00845F',
+    paddingTop: 20,
   },
   searchBox: {
     fontSize: 20,
@@ -105,10 +104,11 @@ const styles = StyleSheet.create({
   results: {
     flex: 1,
     width: '100%',
+    alignItems: 'center',
     marginBottom: 20,
     backgroundColor: '#333',
     padding: 15,
-    borderRadius: 15
+    borderRadius: 50
   },
   heading: {
     color: '#fff',
