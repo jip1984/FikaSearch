@@ -38,7 +38,7 @@ export default function App() {
           }}
         />
 
-        <Text style={styles.title}>{movie.title} </Text>
+        <Text style={styles.card}>{movie.title} </Text>
         <Text style={styles.rating}>Rating:{movie.vote_average}</Text>
 
 
@@ -76,10 +76,18 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#00845F',
+    fontSize: 30,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginBottom: 20
+  },
+  card: {
+    color: '#00845F',
     fontSize: 20,
     fontWeight: '700',
     textAlign: 'center',
     marginBottom: 20
+
   },
   rating: {
     fontSize: 12,
