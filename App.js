@@ -5,9 +5,17 @@ import { StyleSheet, Text, View, TextInput, Image, ActivityIndicator, ScrollView
 export default function App() {
   const [movies, setMovies] = useState([])
   const [loading, setLoading] = useState(true)
+  const [search, setSearch] = useState({
+    s: "Enter a movie...",
+    results: [],
+    selected: {}
+  })
 
   //url for the movies
   const moviesUrl = "https://api.themoviedb.org/3/discover/movie?api_key=d432b933ecc6d5642d8d2befbc40c7ac&language=en-US&page=1&include_adult=false"
+
+  //search movies url
+  const movieSearchUrl = 'https://api.themoviedb.org/3/search/movie?api_key=d432b933ecc6d5642d8d2befbc40c7ac&language=en-US&page=1&include_adult=false&query=searchterm'
 
   //image base url
   const imgUrl = 'https://image.tmdb.org/t/p/w500'
@@ -15,7 +23,7 @@ export default function App() {
   //url for the genres
   const genresUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=d432b933ecc6d5642d8d2befbc40c7ac&language=en-US'
 
-  //Fetching the movies 
+  //Fetching all the movies 
   useEffect(() => {
     fetch(moviesUrl)
       .then((res) => res.json())
@@ -27,8 +35,12 @@ export default function App() {
       }).catch((error) => console.log(error))
   }, [])
 
+  //search movies 
+  const searchMovies = () => {
+  }
 
-  //movies card template will refactor to another component
+
+  //movies card template will refactor to a component
   const Movies = () => movies.map(movie => {
     return (
       <View style={styles.results} key={movie.id}>
@@ -50,6 +62,11 @@ export default function App() {
       <Text style={styles.title}>FikaSearch</Text>
       <TextInput
         style={styles.searchBox}
+        onChange={text => setSearch(prevState => {
+          return { ...prevState, s: text }
+        })}
+        onSubmitEditing={searchMovies}
+        value={search.s}
       />
       <ScrollView>
         {loading ? <ActivityIndicator /> : (
@@ -91,6 +108,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#00845F',
     paddingTop: 20,
+    fontWeight: '700'
   },
   searchBox: {
     fontSize: 20,
